@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.entitie.Collegue;
 import dev.entitie.Vote;
+import dev.repository.CollegueRepository;
 import dev.repository.VoteRepository;
 @RestController
 @RequestMapping("/api/votes")
@@ -24,6 +25,8 @@ public class VoteController {
 	
 	@Autowired
 	VoteRepository voteRepository;
+	@Autowired
+	CollegueRepository collegueRepository;
 	
 	
 //	public List<Vote> getAllVote() {
@@ -39,7 +42,7 @@ public class VoteController {
 		return voteRepository.findAll().stream().filter(v->v.getId().equals(since.get())).collect(Collectors.toList()) ;
 		}
 		else
-			{
+			{ 
 			return voteRepository.findTop3ByOrderByIdDesc();
 			
 			}
@@ -59,6 +62,7 @@ public class VoteController {
 				collegue.score -= 5;
 			}
 			voteRepository.save(vote);
+			collegueRepository.save(collegue);
 			return collegue;
 
 	}

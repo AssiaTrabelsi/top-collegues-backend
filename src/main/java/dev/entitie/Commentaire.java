@@ -1,6 +1,6 @@
 package dev.entitie;
 
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -8,44 +8,37 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name = "vote")
-public class Vote {
-	
+@Table(name = "commentaire")
+public class Commentaire {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@ManyToOne
-	private Collegue collegue ;
+	@Column
+	String comment;
 	
-	private String action ;
-
+	@ManyToOne
+	private Collegue collegue;
+	
 	
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 	public Collegue getCollegue() {
 		return collegue;
 	}
-
 	public void setCollegue(Collegue collegue) {
 		this.collegue = collegue;
 	}
-
-	public String getAction() {
-		return action;
-	}
-
-	public void setAction(String action) {
-		this.action = action;
-	}
-	
 	
 }
